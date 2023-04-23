@@ -3,6 +3,7 @@ package com.example;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Main1 {
@@ -25,6 +26,21 @@ public class Main1 {
                 .map(item -> item.toUpperCase())
                 .filter(item -> item.startsWith("P"))
                 .forEach(item -> System.out.println(item));
+//
+//        // this would give an exception stream has already been operated upon or closed
+//        shoppingListStream.forEach(item -> System.out.println(item));
+
+
+        System.out.println("Storing streams in another object");
+        List<String> sortedShoppingList = shoppingList.stream()
+                .map(item -> item.toUpperCase())
+                .filter(item -> item.startsWith("P"))
+                .sorted()
+                .collect(Collectors.toList());
+
+
+        System.out.println("Original shopping list = " + shoppingList);
+        System.out.println("Sorted shopping list = " + sortedShoppingList);
 
         //Another way of creating stream using elements using of
         Stream<String> lettersStream = Stream.of("A", "B", "C");
