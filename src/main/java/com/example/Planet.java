@@ -7,6 +7,7 @@ public class Planet {
   private boolean hasRings;
   private int numberOfMoons;
 
+  public Planet() {};
   public Planet(String name) {
     this.name = name;
   }
