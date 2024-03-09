@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
@@ -141,5 +142,15 @@ class EmployeeTest {
     IntStream.range(0,100).forEach(i -> {
       System.out.println(i);
     });
+  }
+
+  @Test
+  public void testBiFunction() {
+    Item item = new Item(10,5.5);
+    Item item2 = new Item(100,9.5);
+    BiFunction<Integer, Double, Double> discountedPriceCal = (totalPrice, discountPercent) ->
+            (totalPrice * (100 - discountPercent)) / 100;
+    System.out.println(discountedPriceCal.apply((int) (item.getQuantity() * item.getPrice()), 5D));
+    System.out.println(discountedPriceCal.apply((int) (item2.getQuantity() * item2.getPrice()), 10D));
   }
 }
