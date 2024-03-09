@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.function.TriFunction;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -152,5 +153,18 @@ class EmployeeTest {
             (totalPrice * (100 - discountPercent)) / 100;
     System.out.println(discountedPriceCal.apply((int) (item.getQuantity() * item.getPrice()), 5D));
     System.out.println(discountedPriceCal.apply((int) (item2.getQuantity() * item2.getPrice()), 10D));
+  }
+
+
+  // trifunction
+  @Test
+  public void testTriFunction() {
+    TriFunction<Double, Double, Double, Double> triFunction = (length, width, height) -> {
+      double volume = (length * width * height) / 100;
+      return volume;
+    };
+
+    System.out.println(triFunction.apply(10D, 20D, 30D));
+
   }
 }
