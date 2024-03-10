@@ -163,4 +163,33 @@ class PlanetTest {
 //
 //    System.out.println(planet.getName());
 //  }
+
+
+  @Test
+  public void groupingBy() {
+    List<Map<String, Object>> records = new ArrayList<>();
+    Map<String, Object> object1 = new HashMap<>();
+    object1.put("id", "1ilko");
+    object1.put("Name", "Sanfrancisco");
+    object1.put("qty", 10);
+
+    Map<String, Object> object2 = new HashMap<>();
+    object2.put("id", "1ilko");
+    object2.put("Name", "Sanfrancisco");
+    object2.put("qty", 20);
+
+    Map<String, Object> object3 = new HashMap<>();
+    object3.put("id", "2iuso");
+    object3.put("Name", "Switzerland");
+    object3.put("qty", 30);
+
+    records.add(object1);
+    records.add(object2);
+    records.add(object3);
+
+    Map<String, List<Map<String, Object>>> grouped = records
+                                                    .stream()
+                                                    .collect(Collectors.groupingBy(r -> (String) r.get("id")));
+    System.out.println(grouped);
+  }
 }
