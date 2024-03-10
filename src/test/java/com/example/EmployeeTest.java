@@ -5,8 +5,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
 class EmployeeTest {
@@ -155,7 +159,6 @@ class EmployeeTest {
     System.out.println(discountedPriceCal.apply((int) (item2.getQuantity() * item2.getPrice()), 10D));
   }
 
-
   // trifunction
   @Test
   public void testTriFunction() {
@@ -163,8 +166,31 @@ class EmployeeTest {
       double volume = (length * width * height) / 100;
       return volume;
     };
-
     System.out.println(triFunction.apply(10D, 20D, 30D));
+  }
 
+  // supplier
+  @Test
+  public void testSupplier() {
+    Supplier<Developer> dev = () -> new Developer();
+    Supplier<Developer> defaultDev= () -> new Developer("Roshan");
+    // passing supplier - which could have any type of instance of developer
+    Developer developer = factory(dev);
+    Developer developer1 = factory(defaultDev);
+    System.out.println(developer);
+    System.out.println(developer1);
+  }
+
+  public Developer factory(Supplier<Developer> supplier) {
+
+    Developer developer = supplier.get();
+
+    if (developer.getName() == null || developer.getName().isEmpty()) {
+      developer.setName("default");
+    }
+
+    developer.setSalary(new BigDecimal(0.0));
+    developer.setStart(LocalDate.now());
+    return developer;
   }
 }
